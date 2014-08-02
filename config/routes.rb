@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get  '/links/new',     to: 'links#new',    as: 'new_link'
   post '/links',         to: 'links#create', as: 'links'
   get  '/l/:short_name', to: 'links#show',   as: 'link'
+  post "/users",         to: "users#create", as: "users"
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for
