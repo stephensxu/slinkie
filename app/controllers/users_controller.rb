@@ -12,8 +12,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    @user.save
+    if user_params[:password].length < 6 || user_params[:email].length < 6
+      flash[:notice] = "email and password has to be six digits long!"
+      redirect_to root_url, notice: "email and password has to be six digits long!"
+    else
+      @user = User.new(user_params)
+      @user.save
+      render :new
+    end
   end
 
   private

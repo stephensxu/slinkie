@@ -15,7 +15,15 @@
   Password:<input type="password"  name="user[password]" placeholder="password">
   <input type="submit" value="register" style="width:100px">
 </form>
+
 <br>
+  <% if flash[:notice] %>
+  <div id="notice">
+    <h1><%= flash[:notice] %></h1>
+  </div>
+  <% end %>
+<br>
+
 <h1>Listing links</h1>
 
 <% if flash[:notice] %>
