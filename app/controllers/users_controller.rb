@@ -18,7 +18,9 @@ class UsersController < ApplicationController
     else
       @user = User.new(user_params)
       @user.save
-      render :new
+      login!(@user)
+      current_user
+      render :home
     end
   end
 

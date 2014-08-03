@@ -3,12 +3,15 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(session_params[:email])
     if @user && @user.authenticate(session_params[:password])
-      session[:user_id] = @user.id
       login!(@user)
-      render :"users/new"
+      current_user
+      render :"users/home"
     else
       redirect_to(root_url, notice: "Invalid email or password.")
     end
+  end
+
+  def show
   end
 
   def destroy
