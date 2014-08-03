@@ -1,7 +1,15 @@
 class LinksController < ApplicationController
   # GET /links
   def index
+    current_user
+    p "session hash look like #{session[:user_id]}"
+    p "logged in ? #{logged_in?}"
     @links = Link.order('created_at DESC')
+    if logged_in?
+      render :"users/home"
+    else
+      render :index
+    end
   end
 
   # GET /l/:short_name
