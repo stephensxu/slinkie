@@ -1,0 +1,1 @@
+1) Why is destroy action in session controller handled by GET request instead of POST?

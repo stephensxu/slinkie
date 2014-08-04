@@ -40,8 +40,8 @@ Rails.application.routes.draw do
   end
 
   controller :sessions do
-    post "/login",  action: "create",         as: "login"
-    get  "/session",       action: "show"
+    post "/login",          action: "create",         as: "login"
+    get  "/session",        action: "show"
     get '/logout',          action: "destroy",        as: "logout"
   end
 
