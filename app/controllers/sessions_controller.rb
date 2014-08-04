@@ -5,10 +5,9 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(session_params[:password])
       login!(@user)
       current_user
-      p "created a session, now session[:user_id] look like #{session[:user_id]}"
-      p "logged in ? #{logged_in?}"
       render :"users/home"
     else
+      # flash[:notice] = "Invalid email or password."
       redirect_to(root_url, notice: "Invalid email or password.")
     end
   end
