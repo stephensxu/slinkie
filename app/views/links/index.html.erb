@@ -1,20 +1,15 @@
 <h1> Welcome to URL-Shortener, make long url address into short url address! </h1>
 <br>
-<h1>Please login to see links submitted by yourslef</h1>
+<h1>Please login to see more</h1>
 <br>
-<form method="POST" action="/sessions/new">
-  Log in with email:<input type="text" name="user[email]" placeholder="email">
-  Password:<input type="password" name="user[password]" placeholder="password">
-  <input type="submit" value="login" style="width:100px">
-</form>
+
+<%= render partial: "shared/login_form" %>
+
 <br>
 <h1>Or register</h1>
 <br>
-<form method="POST" action="/users/new">
-  Register with email:<input type="text" name="user[email]" value="">
-  Password:<input type="password"  name="user[password]" placeholder="password">
-  <input type="submit" value="register" style="width:100px">
-</form>
+
+<%= render partial: "shared/registration_form" %>
 
 <br>
   <% if flash[:notice] %>

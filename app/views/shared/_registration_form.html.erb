@@ -1,0 +1,5 @@
+<%= form_for(:user, :url => registration_path, :method => :post) do |f| %>
+  Register with Email <%= f.text_field(:email, placeholder: "Email")%>
+  Password <%= f.password_field(:password, placeholder: "password")%>
+  <%= f.submit "Register", :style => "width:100px" %>
+<% end %>

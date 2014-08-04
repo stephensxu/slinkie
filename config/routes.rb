@@ -40,12 +40,13 @@ Rails.application.routes.draw do
   end
 
   controller :sessions do
-    post "/sessions/new",  action: "create",        as: "sessions"
-    get  "/session",       action: "show",           as: "session"
+    post "/login",  action: "create",         as: "login"
+    get  "/session",       action: "show"
+    get '/logout',          action: "destroy",        as: "logout"
   end
 
   controller :users do
-    post "/users/new",     action: "create",        as: "users"
+    post "/users/new",     action: "create",        as: "registration"
   end
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
