@@ -1,7 +1,6 @@
 class LinksController < ApplicationController
   # GET /links
   def index
-    current_user
     @links = Link.order('created_at DESC')
     if logged_in?
       render :"users/home"

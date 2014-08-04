@@ -12,15 +12,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    if user_params[:password].length < 6 || user_params[:email].length < 6
-      redirect_to root_url, notice: "Email and password has to be at least six characters long!"
-    else
-      @user = User.new(user_params)
-      @user.save
+    @user = User.new(user_params)
+    if @user.save
       login!(@user)
+      @links = Link.order('created_at DESC')
       current_user
       render :home
+    else
+      redirect_to root_url, notice: "Email and password has to be at least six characters long!"
     end
+
   end
 
   private

@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(session_params[:email])
     if @user && @user.authenticate(session_params[:password])
       login!(@user)
+      @links = Link.order('created_at DESC')
       current_user
       render :"users/home"
     else
