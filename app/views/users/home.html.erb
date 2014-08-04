@@ -6,8 +6,9 @@
       <th>Added</th>
       <th>Short URL</th>
       <th>URL</th>
-      <th>clicks</th>
-      <th colspan="4"></th>
+      <th>Creator</th>
+      <th>Clicks</th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -17,6 +18,7 @@
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
         <td><%= link_url(link) %></td>
         <td><%= link.url %></td>
+        <td><%= link.user.email %></td>
         <td><%= link.clicks_count %></td>
         <td><%= link_to 'Visit link', link %></td>
       </tr>

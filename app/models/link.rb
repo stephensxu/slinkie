@@ -4,6 +4,8 @@ class Link < ActiveRecord::Base
   validates :url, :presence => true
   validates :clicks_count, :presence => true, numericality: { only_integer: true }
 
+  belongs_to :user
+
   # This controls how an ActiveRecord object is displayed in a URL context.
   # This way, if we do link_path(@link), Rails will generate a path like
   # "/l/#{@link.short_name}" vs. "/l/#{@link.id}".

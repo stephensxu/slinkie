@@ -2,8 +2,6 @@ class LinksController < ApplicationController
   # GET /links
   def index
     current_user
-    p "session hash look like #{session[:user_id]}"
-    p "logged in ? #{logged_in?}"
     @links = Link.order('created_at DESC')
     if logged_in?
       render :"users/home"
@@ -33,6 +31,7 @@ class LinksController < ApplicationController
   # POST /links
   def create
     @link = Link.new(link_params)
+    @link.user = current_user
 
     if @link.save
       redirect_to root_url, notice: 'Link was successfully created.'
