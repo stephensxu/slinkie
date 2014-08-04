@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   def login!(user)
     session[:user_id] = user.id
     @links = Link.order('created_at DESC')
+    @my_links = user.links
     @current_user = user
   end
 
