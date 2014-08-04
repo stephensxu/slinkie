@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
       current_user
       render :"users/home"
     else
-      # flash[:notice] = "Invalid email or password."
       redirect_to(root_url, notice: "Invalid email or password.")
     end
   end
