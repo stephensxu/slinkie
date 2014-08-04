@@ -1,1 +1,3 @@
 1) Why is destroy action in session controller handled by GET request instead of POST?
+
+2) Sessions are now created in two ways: logging in with registered email and password, OR registering new email/password, is this the right practice? It feels a little fishy to be creating a session in the user controller while there is a separate session controller, however there is no way to redirect to a POST action in SessionController from UserController.
