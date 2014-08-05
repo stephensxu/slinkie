@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   root to: 'links#index'
 
-  resources :users
+  resources :users, except: :destroy
 
   controller :links do
     get  '/links/new',      action: 'new',           as: 'new_link'
