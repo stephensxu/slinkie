@@ -4,17 +4,13 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(session_params[:email])
     if @user && @user.authenticate(session_params[:password])
       login!(@user)
-      @links = Link.order('created_at DESC')
-      current_user
-      render :"users/home"
+      redirect_to users_path
     else
       redirect_to(root_url, notice: "Invalid email or password.")
     end
   end
 
   def show
-    current_user
-    render :"users/home"
   end
 
   def destroy

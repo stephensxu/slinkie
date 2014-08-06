@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.order('created_at DESC')
+    current_user
+    @links = Link.order('created_at DESC')
+    render :"users/home"
   end
 
   def show
@@ -15,13 +17,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      @links = Link.order('created_at DESC')
-      current_user
-      render :home
+      redirect_to users_path
     else
-      redirect_to root_url, notice: "Email and password has to be at least six characters long!"
+      redirect_to root_path, notice: "Email and password has to be at least six characters long!"
     end
-
   end
 
   private
