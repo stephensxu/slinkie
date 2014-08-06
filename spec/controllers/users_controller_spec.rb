@@ -41,9 +41,9 @@ RSpec.describe UsersController, :type => :controller do
         post :create, { user: valid_attributes }, logged_out_session
       end
 
-      it "renders the users/home page after logging in" do
+      it "redirect to users_path" do
         post :create, { user: valid_attributes }, logged_out_session
-        expect(response).to render_template("users/home")
+        expect(response).to redirect_to(users_path)
       end
     end
 
@@ -58,9 +58,9 @@ RSpec.describe UsersController, :type => :controller do
         post :create, { user: invalid_attributes }, logged_out_session
       end
 
-      it "redirect back to root_url" do
+      it "returns a http request response with status 200" do
         post :create, { user: invalid_attributes }, logged_out_session
-        expect(response).to redirect_to(root_url)
+        expect(response.status).to eq(200)
       end
     end
   end

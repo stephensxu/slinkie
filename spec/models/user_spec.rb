@@ -4,8 +4,8 @@ RSpec.describe User, :type => :model do
   it { should have_many(:links) }
   
   describe "#valid?" do
-    it { should validate_presence_of(:email)}
-    it { should validate_presence_of(:password)}
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:password) }
     it { should ensure_length_of(:email).is_at_least(6) }
     it { should ensure_length_of(:password).is_at_least(6) }
     it { should allow_value("waffle@gmail.com", "foo+bar@gmail.io").for(:email) }

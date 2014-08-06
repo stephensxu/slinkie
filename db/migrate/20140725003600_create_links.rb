@@ -4,7 +4,7 @@ class CreateLinks < ActiveRecord::Migration
       t.string :short_name, null: false
       t.string :url, null: false
 
-      t.timestamps null:false
+      t.timestamps null: false
     end
 
     add_index :links, :short_name, :unique => true

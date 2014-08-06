@@ -16,14 +16,14 @@ RSpec.describe SessionsController, :type => :controller do
         post :create, { session: credentials }, {}
       end
 
-      it "renders user home page" do
+      it "redirect to users_path" do
         post :create, { session: credentials }, {}
-        expect(response).to render_template("users/home")
+        expect(response).to redirect_to(users_path)
       end
     end
 
     context "with invalid email" do
-      let(:credentials) { { email: "somethinginvalid@errorcandy", password: 1234, } }
+      let(:credentials) { { email: "somethinginvalid@errorcandy", password: "1234" } }
 
       it "does not call login!" do
         expect(controller).to_not receive(:login!)
@@ -52,7 +52,7 @@ RSpec.describe SessionsController, :type => :controller do
 
     context "when user is logged out" do
       it "does not try to log the user out" do
-        expect(controller).to_not receive(:logout)
+        expect(controller).to_not receive(:logout!)
         get :destroy, {}, {}
       end
 

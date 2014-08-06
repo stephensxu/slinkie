@@ -19,7 +19,6 @@
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
         <td><%= link_url(link) %></td>
         <td><%= link.url %></td>
-        <!-- <td><%= link.user.nil? ? "Guest" : link.user.email %></td> -->
         <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>
         <td><%= link_to 'Visit link', link %></td>

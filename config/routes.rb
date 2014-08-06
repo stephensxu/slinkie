@@ -42,14 +42,10 @@ Rails.application.routes.draw do
   end
 
   controller :sessions do
-    post "/login",          action: "create",        as: "login"
-    get  "/session",        action: "show"
-    get '/logout',          action: "destroy",       as: "logout"
+    post '/login',          action: 'create',        as: 'login'
+    get  '/session',        action: 'show'
+    get '/logout',          action: 'destroy',       as: 'logout'
   end
-
-  # controller :users do
-  #   post "/users",          action: "create",        as: "registration"
-  # end
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for
