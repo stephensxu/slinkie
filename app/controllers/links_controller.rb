@@ -3,7 +3,7 @@ class LinksController < ApplicationController
   def index
     @links = Link.order('created_at DESC')
     if logged_in?
-      redirect_to user_path
+      redirect_to users_path
     else
       render :index
     end

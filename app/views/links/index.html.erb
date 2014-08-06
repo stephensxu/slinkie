@@ -6,17 +6,14 @@
 <%= render partial: "shared/login_form" %>
 
 <br>
-<h1>Or register</h1>
+<h1>Or <%= link_to("Sign up", new_user_path) %></h1>
 <br>
 
-<%= render partial: "shared/registration_form" %>
-
-<br>
-  <% if flash[:notice] %>
+<% if flash[:notice] %>
   <div id="notice">
     <h1><%= flash[:notice] %></h1>
   </div>
-  <% end %>
+<% end %>
 <br>
 
 <h1>Listing links</h1>
