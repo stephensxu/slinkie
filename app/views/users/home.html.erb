@@ -1,31 +1,15 @@
-<h1> Welcome to URL-Shortener, make long url address into short url address! </h1>
+<h1><%= render partial: "shared/header" %></h1>
 <br>
-<h1>Please login to see more</h1>
 <br>
-
-<%= render partial: "shared/login_form" %>
-
-<br>
-<h1>Or <%= link_to("Sign up", new_user_path) %></h1>
-<br>
-
-<% if flash[:notice] %>
-  <div id="notice">
-    <strong><%= flash[:notice] %></strong>
-  </div>
-<% end %>
-<br>
-
-<h1>Listing links</h1>
-
 <table>
   <thead>
     <tr>
       <th>Added</th>
       <th>Short URL</th>
       <th>URL</th>
-      <th>clicks</th>
-      <th colspan="4"></th>
+      <th>Creator</th>
+      <th>Clicks</th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -35,6 +19,7 @@
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
         <td><%= link_url(link) %></td>
         <td><%= link.url %></td>
+        <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>
         <td><%= link_to 'Visit link', link %></td>
       </tr>

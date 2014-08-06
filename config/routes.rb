@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   #
   # This is short-hand for the following routes:
   #
-  #   get    '/links',          to: 'links#index', as: 'links'
+  #   get      '/links',        to: 'links#index', as: 'links'
   #   post   '/links',          to: 'links#create'
   #   get    '/links/new',      to: 'links#new',   as: 'new_link'
   #   get    '/links/:id/edit', to: 'links#edit',  as: 'edit_link'
@@ -31,9 +31,21 @@ Rails.application.routes.draw do
   # so these will be our routes.
 
   root to: 'links#index'
-  get  '/links/new',     to: 'links#new',    as: 'new_link'
-  post '/links',         to: 'links#create', as: 'links'
-  get  '/l/:short_name', to: 'links#show',   as: 'link'
+
+  resources :users, except: :destroy
+
+  controller :links do
+    get  '/links/new',      action: 'new',           as: 'new_link'
+    get  '/links',          action: 'index',         as: 'index'
+    post '/links',          action: 'create',        as: 'links'
+    get  '/l/:short_name',  action: 'show',          as: 'link'
+  end
+
+  controller :sessions do
+    post '/login',          action: 'create',        as: 'login'
+    get  '/session',        action: 'show'
+    get '/logout',          action: 'destroy',       as: 'logout'
+  end
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for

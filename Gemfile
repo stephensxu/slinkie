@@ -9,6 +9,7 @@ gem 'jquery-rails'
 # Use BCrypt for has_secure_password
 # See: http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html
 gem 'bcrypt', '~> 3.1.7'
+gem 'valid_email'
 
 group :development do
   # Spring speeds up development by keeping your application running in the
