@@ -1,0 +1,7 @@
+Script started on Wed Aug  6 19:31:16 2014
+[?1034h[01;33mstephensxu@Sauron[01;31m url-shortener $[00m ls
+Gemfile		README.md	bin		db		public		tmp
+Gemfile.lock	Rakefile	config		lib		questions.md	typescript
+Procfile	app		config.ru	log		spec		vendor
+[01;33mstephensxu@Sauron[01;31m url-shortener $[00m cd ..
+[01;33mstephensxu@Sauron[01;31m codeunion $[00m 
