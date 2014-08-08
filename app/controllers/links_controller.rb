@@ -39,6 +39,12 @@ class LinksController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
   # Only allow a trusted parameter "white list" through.
   def link_params
