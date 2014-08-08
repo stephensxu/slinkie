@@ -32,7 +32,7 @@
           <% if link.editable_by?(@current_user) %>
             <ul class="link-actions">
               <li><%= link_to("Edit", edit_link_path(link)) %></li>
-              <li><%= link_to("Delete", delete_link_path(link)) %></li>
+              <li><%= button_to("Delete", delete_link_path(link), :method => :delete) %></li>
             </ul> 
           <% end %>
         </td>
