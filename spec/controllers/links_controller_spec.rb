@@ -24,7 +24,7 @@ RSpec.describe LinksController, :type => :controller do
   # Link. As you add validations to Link, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    {:url => 'http://example.com/widgets'}
+    FactoryGirl.attributes_for(:link)
   end
 
   let(:invalid_attributes) do
@@ -101,4 +101,30 @@ RSpec.describe LinksController, :type => :controller do
       end
     end
   end
+
+  describe 'GET edit' do
+    let(:link) { FactoryGirl.create(:link_with_user) }
+    
+    behavior_when 'the user created the requested link'
+    behavior_when 'the user did not create the requested link'
+    behavior_when 'the user is not logged in'
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
