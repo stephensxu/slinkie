@@ -137,11 +137,21 @@ RSpec.describe LinksController, :type => :controller do
 
   describe "PATCH update" do
     let(:link) { FactoryGirl.create(:link_with_user) }
-      it "changes the url from old link to new link" do
+      it "changes the url from old link to new link when user is logged in" do
         expect {
-          patch :update, { :short_name => link.to_param, :url => "http://www.awesome.com" }, { user_id: link.user_id }
-          link.reload
+          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { user_id: link.user_id }
         }.to change{ link.reload.url }.to("http://www.awesome.com")
+      end
+
+      it "redirects to the root url" do
+        patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { user_id: link.user_id }
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "does not change the url when user is not logged in" do
+        expect {
+          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, {}
+        }.to_not change{ link.reload.url }
       end
    end
 end
