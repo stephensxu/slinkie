@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     post '/links',              action: 'create',        as: 'links'
     get  '/l/:short_name',      action: 'show',          as: 'link'
     get  '/l/:short_name/edit', action: 'edit',          as: 'edit_link'
+    patch '/l/:short_name',     action: 'update'
   end
 
   controller :sessions do

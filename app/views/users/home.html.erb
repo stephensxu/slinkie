@@ -43,4 +43,11 @@
 
 <br>
 
+<% if flash[:notice] %>
+  <div id="notice">
+    <strong><%= flash[:notice] %></strong>
+  </div>
+<% end %>
+
+
 <%= link_to 'New Link', new_link_path %>
