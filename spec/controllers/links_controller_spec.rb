@@ -110,6 +110,31 @@ RSpec.describe LinksController, :type => :controller do
     behavior_when "the user is not logged in"
   end
 
+  describe "DELETE destroy" do
+    let!(:link) { FactoryGirl.create(:link_with_user) }
+
+    behavior_when "the user created the requested link" do
+      it "destroys the requested link" do
+        expect {
+          delete :destroy, { :short_name => link.to_param }, { user_id: link.user_id }
+        }.to change(Link, :count).by(-1)
+      end
+
+      it "redirects to the root url" do
+        delete :destroy, { :short_name => link.to_param }, { user_id: link.user_id }
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    behavior_when "the user is not logged in" do
+      it "does not destroy the requested link" do
+        expect {
+          delete :destroy, { :short_name => link.to_param }, {}
+        }.to_not change(Link, :count)
+      end
+    end
+  end
+
   describe "PATCH update" do
     let(:link) { FactoryGirl.create(:link_with_user) }
       it "changes the url from old link to new link" do
@@ -120,21 +145,3 @@ RSpec.describe LinksController, :type => :controller do
       end
    end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
