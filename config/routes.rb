@@ -35,10 +35,13 @@ Rails.application.routes.draw do
   resources :users, except: :destroy
 
   controller :links do
-    get  '/links/new',      action: 'new',           as: 'new_link'
-    get  '/links',          action: 'index',         as: 'index'
-    post '/links',          action: 'create',        as: 'links'
-    get  '/l/:short_name',  action: 'show',          as: 'link'
+    get  '/links/new',          action: 'new',           as: 'new_link'
+    get  '/links',              action: 'index',         as: 'index'
+    post '/links',              action: 'create',        as: 'links'
+    get  '/l/:short_name',      action: 'show',          as: 'link'
+    get  '/l/:short_name/edit', action: 'edit',          as: 'edit_link'
+    patch '/l/:short_name',     action: 'update'
+    delete '/l/:short_name',    action: 'destroy',       as: "delete_link"
   end
 
   controller :sessions do

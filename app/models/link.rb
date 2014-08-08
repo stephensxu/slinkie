@@ -19,6 +19,10 @@ class Link < ActiveRecord::Base
     self.save
   end
 
+  def editable_by?(user)
+    user.present? && self.user == user
+  end
+
   private
   def set_short_name
     # Generate and assign a random short_name unless one has already been set.

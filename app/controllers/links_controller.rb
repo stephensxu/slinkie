@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :require_authorization!, only: [:edit, :update, :destroy]
   # GET /links
   def index
     @links = Link.order('created_at DESC')
@@ -12,8 +14,6 @@ class LinksController < ApplicationController
   # GET /l/:short_name
   # See routes.rb for how this is set up.
   def show
-    @link = Link.find_by_short_name(params[:short_name])
-
     if @link
       @link.clicked!
       redirect_to @link.url
@@ -39,9 +39,33 @@ class LinksController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @link.update(link_params)
+      redirect_to root_url, notic: 'Link was succesfully updated'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @link.destroy
+    redirect_to root_url, notice: "Oops, you've deleted that link!"
+  end
+
   private
   # Only allow a trusted parameter "white list" through.
   def link_params
     params.require(:link).permit(:url)
+  end
+
+  def set_link
+    @link = Link.find_by_short_name(params[:short_name])
+  end
+
+  def require_authorization!
+    head(:forbidden) unless @link.editable_by?(current_user)
   end
 end

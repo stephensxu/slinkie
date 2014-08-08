@@ -24,12 +24,12 @@ RSpec.describe LinksController, :type => :controller do
   # Link. As you add validations to Link, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    {:url => 'http://example.com/widgets'}
+    FactoryGirl.attributes_for(:link)
   end
 
   let(:invalid_attributes) do
     # We shouldn't be able to submit a short_name ourselves
-    {:short_name => 'waffles'}
+    { :short_name => 'waffles' }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -50,14 +50,14 @@ RSpec.describe LinksController, :type => :controller do
   describe "GET show" do
     it "redirects to the link's URL" do
       link = Link.create! valid_attributes
-      get :show, {:short_name => link.to_param}, valid_session
+      get :show, { :short_name => link.to_param }, valid_session
       expect(response).to redirect_to(link.url)
     end
 
     it "increments the value of clicks_count" do
       link = Link.create! valid_attributes
       expect {
-        get :show, {:short_name => link.to_param}, valid_session
+        get :show, { :short_name => link.to_param }, valid_session
       }.to change{ link.reload.clicks_count }.by(1)
     end
   end
@@ -73,32 +73,85 @@ RSpec.describe LinksController, :type => :controller do
     describe "with valid params" do
       it "creates a new Link" do
         expect {
-          post :create, {:link => valid_attributes}, valid_session
+          post :create, { :link => valid_attributes }, valid_session
         }.to change(Link, :count).by(1)
       end
 
       it "assigns a newly created link as @link" do
-        post :create, {:link => valid_attributes}, valid_session
+        post :create, { :link => valid_attributes }, valid_session
         expect(assigns(:link)).to be_a(Link)
         expect(assigns(:link)).to be_persisted
       end
 
       it "redirects to the root URL" do
-        post :create, {:link => valid_attributes}, valid_session
+        post :create, { :link => valid_attributes }, valid_session
         expect(response).to redirect_to(root_url)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved link as @link" do
-        post :create, {:link => invalid_attributes}, valid_session
+        post :create, { :link => invalid_attributes }, valid_session
         expect(assigns(:link)).to be_a_new(Link)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:link => invalid_attributes}, valid_session
+        post :create, { :link => invalid_attributes }, valid_session
         expect(response).to render_template("new")
       end
     end
   end
+
+  describe 'GET edit' do
+    let(:link) { FactoryGirl.create(:link_with_user) }
+    
+    behavior_when "the user created the requested link"
+    behavior_when "the user did not create the requested link"
+    behavior_when "the user is not logged in"
+  end
+
+  describe "DELETE destroy" do
+    let!(:link) { FactoryGirl.create(:link_with_user) }
+
+    behavior_when "the user created the requested link" do
+      it "destroys the requested link" do
+        expect {
+          delete :destroy, { :short_name => link.to_param }, { user_id: link.user_id }
+        }.to change(Link, :count).by(-1)
+      end
+
+      it "redirects to the root url" do
+        delete :destroy, { :short_name => link.to_param }, { user_id: link.user_id }
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    behavior_when "the user is not logged in" do
+      it "does not destroy the requested link" do
+        expect {
+          delete :destroy, { :short_name => link.to_param }, {}
+        }.to_not change(Link, :count)
+      end
+    end
+  end
+
+  describe "PATCH update" do
+    let(:link) { FactoryGirl.create(:link_with_user) }
+      it "changes the url from old link to new link when user is logged in" do
+        expect {
+          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { user_id: link.user_id }
+        }.to change{ link.reload.url }.to("http://www.awesome.com")
+      end
+
+      it "redirects to the root url" do
+        patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { user_id: link.user_id }
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "does not change the url when user is not logged in" do
+        expect {
+          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, {}
+        }.to_not change{ link.reload.url }
+      end
+   end
 end
