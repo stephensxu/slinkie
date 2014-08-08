@@ -7,7 +7,7 @@
   <col width="200">
   <col width="200">
   <col width="50">
-  <col width="150">
+  <col width="80">
 
   <thead>
     <tr>
@@ -16,6 +16,7 @@
       <th>URL</th>
       <th>Creator</th>
       <th>Clicks</th>
+      <th>Visibility</th>
       <th colspan="3">Actions</th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
         <td><%= link.url %></td>
         <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>
+        <td><%= button_to("#{link_visibility(link)}", root_path) %></td>
         <td>
           <% if link.editable_by?(@current_user) %>
             <ul class="link-actions">
