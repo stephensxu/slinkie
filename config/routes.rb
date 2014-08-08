@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     get  '/l/:short_name',      action: 'show',          as: 'link'
     get  '/l/:short_name/edit', action: 'edit',          as: 'edit_link'
     patch '/l/:short_name',     action: 'update'
+    delete '/l/:short_name',    action: 'destroy',       as: "delete_link"
   end
 
   controller :sessions do

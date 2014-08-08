@@ -50,6 +50,11 @@ class LinksController < ApplicationController
     end
   end
 
+  def destroy
+    @link.destroy
+    redirect_to root_url, notice: "Oops, you've deleted that link!"
+  end
+
   private
   # Only allow a trusted parameter "white list" through.
   def link_params

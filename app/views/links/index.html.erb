@@ -19,6 +19,10 @@
 <h1>Listing links</h1>
 
 <table>
+  <col width="130">
+  <col width="200">
+  <col width="200">
+  <col width="50">
   <thead>
     <tr>
       <th>Added</th>
@@ -33,10 +37,9 @@
     <% @links.each do |link| %>
       <tr>
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
-        <td><%= link_url(link) %></td>
+        <td><%= link_to(link_path(link), link) %></td>
         <td><%= link.url %></td>
         <td><%= link.clicks_count %></td>
-        <td><%= link_to 'Visit link', link %></td>
       </tr>
     <% end %>
   </tbody>
