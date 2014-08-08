@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :require_authorization!, only: [:edit, :update, :destroy]
   # GET /links
   def index
     @links = Link.order('created_at DESC')
@@ -57,5 +58,9 @@ class LinksController < ApplicationController
 
   def set_link
     @link = Link.find_by_short_name(params[:short_name])
+  end
+
+  def require_authorization!
+    head(:forbidden) unless @link.editable_by?(current_user)
   end
 end
