@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
 
   validates :url, :presence => true
   validates :clicks_count, :presence => true, numericality: { only_integer: true }
-  validates :private, :presence => true
+  # validates :private, :presence => true
 
   belongs_to :user
 
