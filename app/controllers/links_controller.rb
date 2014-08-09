@@ -44,7 +44,7 @@ class LinksController < ApplicationController
 
   def update
     if @link.update(link_params)
-      redirect_to root_url, notic: 'Link was succesfully updated'
+      redirect_to root_url, notice: 'Link was succesfully updated'
     else
       render :edit
     end

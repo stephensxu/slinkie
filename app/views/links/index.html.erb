@@ -35,6 +35,7 @@
 
   <tbody>
     <% @links.each do |link| %>
+      <% next if link.private %>
       <tr>
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
         <td><%= link_to(link_path(link), link) %></td>

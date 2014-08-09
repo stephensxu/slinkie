@@ -19,6 +19,11 @@ class Link < ActiveRecord::Base
     self.save
   end
 
+  def change_privacy
+    self.private ? self.private = false : self.private = true
+    self.save
+  end
+
   def editable_by?(user)
     user.present? && self.user == user
   end
