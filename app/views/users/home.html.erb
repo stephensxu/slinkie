@@ -29,7 +29,12 @@
         <td><%= link.url %></td>
         <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>
-        <td><%= button_to("#{link_visibility(link)}", root_path) %></td>
+        <td>
+          <% if link.editable_by?(@current_user) %>
+            <%= button_to("#{link_visibility(link)}", patch_link_path(link), 
+            :method => :patch, :params => { "link[private]" => "false" }) %>
+          <% end %>
+        </td>
         <td>
           <% if link.editable_by?(@current_user) %>
             <ul class="link-actions">
