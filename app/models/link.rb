@@ -2,10 +2,11 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
-  validates :clicks_count, :presence => true, numericality: { only_integer: true }
+  validates :clicks_count, :presence => true, :numericality => { only_integer: true }
   # validates :private, :presence => true
 
   belongs_to :user
+  has_many :clicks, :class_name => "LinkClick"
 
   # This controls how an ActiveRecord object is displayed in a URL context.
   # This way, if we do link_path(@link), Rails will generate a path like
@@ -16,8 +17,13 @@ class Link < ActiveRecord::Base
   end
 
   def clicked!
-    self.clicks_count += 1
-    self.save
+    # self.clicks_count += 1
+    # self.save
+    self.clicks.create(click_attributes)
+  end
+
+  def clicks_count
+    self.clicks.count
   end
 
   def change_privacy
