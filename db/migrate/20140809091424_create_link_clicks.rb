@@ -1,10 +1,10 @@
 class CreateLinkClicks < ActiveRecord::Migration
   def change
     create_table :link_clicks do |t|
-      t.reference :link
-      t.string :referrer
+      t.references :link, :null => false
+      t.string :referrer, :null => false
 
-      t.timestamps
+      t.timestamps :null => false
     end
   end
 end
