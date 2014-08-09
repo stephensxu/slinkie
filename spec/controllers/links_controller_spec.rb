@@ -139,8 +139,14 @@ RSpec.describe LinksController, :type => :controller do
     let(:link) { FactoryGirl.create(:link_with_user) }
       it "changes the url from old link to new link when user is logged in" do
         expect {
-          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { user_id: link.user_id }
+          patch :update, { :short_name => link.to_param, :link => { :url => "http://www.awesome.com"} }, { :user_id => link.user_id }
         }.to change{ link.reload.url }.to("http://www.awesome.com")
+      end
+
+      it "changes the status of privacy when user is logged in and clicks on visibility button" do
+        expect {
+          patch :update, { :short_name => link.to_param, :link => { :private => "true"} }, { :user_id => link.user_id }
+        }.to change{ link.reload.private }.from(false).to(true)
       end
 
       it "redirects to the root url" do
