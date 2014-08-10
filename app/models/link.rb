@@ -2,7 +2,6 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
-  validates :clicks_count, :presence => true, :numericality => { :only_integer => true }
   # validates :private, :presence => true, inclusion: { in: [true, false] }
 
   belongs_to :user

@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Link, :type => :model do
   describe '#valid?' do
     it { should validate_presence_of(:url) }
-    it { should validate_presence_of(:clicks_count) }
     # it { should validate_presence_of(:private) }
   end
 
@@ -27,9 +26,10 @@ RSpec.describe Link, :type => :model do
   describe '#clicked!' do
     let(:link) { FactoryGirl.create(:link) }
     it "increments the value of click_count" do
+      request = ActionController::TestRequest.new(:host => "http://www.awesome.com")
       expect {
-        link.clicked!
-      }.to change(link, :clicks_count).by(1)
+        link.clicked!(request)
+      }.to change{ link.reload.clicks.count }.by(1)
     end
   end
 
@@ -62,16 +62,6 @@ RSpec.describe Link, :type => :model do
       it 'returns false for an anonymous user' do
         expect(link).to_not be_editable_by(nil)
       end
-    end
-  end
-
-  describe '#clicked!' do
-    let(:link) { FactoryGirl.create(:link) }
-
-    it 'increments the click count' do
-      expect {
-        link.clicked!
-      }.to change(link, :clicks_count).by(1)
     end
   end
 end
