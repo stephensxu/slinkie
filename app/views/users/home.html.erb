@@ -3,7 +3,7 @@
 <br>
 <table>
   <col width="130">
-  <col width="200">
+  <col width="250">
   <col width="200">
   <col width="200">
   <col width="100">
@@ -26,7 +26,7 @@
       <% next if link.private && link.user != @current_user %>
       <tr>
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
-        <td><%= link_to(link_path(link), link) %></td>
+        <td><%= link_to(link_url(link), link) %></td>
         <td><%= link.url %></td>
         <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>

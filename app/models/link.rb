@@ -2,8 +2,8 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
-  validates :clicks_count, :presence => true, :numericality => { only_integer: true }
-  # validates :private, :presence => true
+  validates :clicks_count, :presence => true, :numericality => { :only_integer => true }
+  # validates :private, :presence => true, inclusion: { in: [true, false] }
 
   belongs_to :user
   has_many :clicks, :class_name => "LinkClick"
@@ -16,10 +16,9 @@ class Link < ActiveRecord::Base
     self.short_name
   end
 
-  def clicked!
-    # self.clicks_count += 1
-    # self.save
-    self.clicks.create(click_attributes)
+  def clicked!(request)
+    self.clicks.create(:referrer => request.referrer)
+    self.save
   end
 
   def clicks_count
