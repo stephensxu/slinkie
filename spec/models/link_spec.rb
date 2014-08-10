@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Link, :type => :model do
   describe '#valid?' do
     it { should validate_presence_of(:url) }
+    it { should belong_to(:user) }
     # it { should validate_presence_of(:private) }
   end
 
@@ -28,8 +29,10 @@ RSpec.describe Link, :type => :model do
     it "increments the value of click_count" do
       request = ActionController::TestRequest.new(:host => "http://www.awesome.com")
       expect {
-        link.clicked!(request)
-      }.to change{ link.reload.clicks.count }.by(1)
+        p "BEFORE CLICKS: #{link.reload.clicks.count }"
+        link.clicked!(:referrer => request.referrer)
+        p "BEFORE CLICKS: #{link.reload.clicks.count }"
+      }.to change{ link.reload.clicks_count }.by(1)
     end
   end
 

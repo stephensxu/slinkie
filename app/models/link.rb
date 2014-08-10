@@ -15,9 +15,8 @@ class Link < ActiveRecord::Base
     self.short_name
   end
 
-  def clicked!(request)
-    self.clicks.create(:referrer => request.referrer)
-    self.save
+  def clicked!(click_attributes = {})
+    self.clicks.create(click_attributes)
   end
 
   def clicks_count

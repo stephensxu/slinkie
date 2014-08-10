@@ -54,12 +54,13 @@ RSpec.describe LinksController, :type => :controller do
       expect(response).to redirect_to(link.url)
     end
 
-    it "increments the value of clicks_count" do
+    it "increments the value of clicks count" do
       link = Link.create! valid_attributes
       expect {
+        p "BEFORE CLICKS: #{link.reload.clicks.count }"
         get :show, { :short_name => link.to_param }, valid_session
-        p "CLICKS: #{link.reload.clicks.count }"
-      }.to change{ link.reload.clicks.count }.by(1)
+        p "AFTER CLICKS: #{link.reload.clicks.count }"
+      }.to change{ link.reload.clicks_count }.by(1)
     end
   end
 

@@ -15,7 +15,7 @@ class LinksController < ApplicationController
   # See routes.rb for how this is set up.
   def show
     if @link
-      @link.clicked!(request)
+      @link.clicked!(:referrer => request.referrer)
       redirect_to @link.url
     else
       render text: "No such link.", status: 404
