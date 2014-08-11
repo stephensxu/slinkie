@@ -27,8 +27,9 @@
       <tr>
         <th>Added</th>
         <th>SlimLink</th>
+        <th>Nickname</th>
+        <th>Clicks</th>
         <th>Original URL</th>
-        <th>clicks</th>
         <th colspan="4"></th>
       </tr>
     </thead>
@@ -39,9 +40,9 @@
         <tr>
           <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
           <td class="main_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link.url %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link.nickname %></span></td>
           <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
-          <td class="main_table_cell"><span class="main_table_content">SOMETHING</span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link.url %></span></td>
         </tr>
       <% end %>
     </tbody>
