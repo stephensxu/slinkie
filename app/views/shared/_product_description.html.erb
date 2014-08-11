@@ -1,5 +1,4 @@
 <h2>How does it work?</h2>
-Enter a REALLY LONG URL here:
 <%= form_for(link) do |f| %>
   <% if link.errors.any? %>
     <div id="error_explanation">
@@ -14,11 +13,12 @@ Enter a REALLY LONG URL here:
   <% end %>
 
   <div class="field">
+    <%= f.label :"Enter a REALLY LONG URL here" %><br>
     <%= f.text_field :url, :class => "url_box" %>
   </div>
 
   <div class="field">
-    Give it a nickname<br>
+    <%= f.label :"Give it a nickname" %><br>
     <%= f.text_field :nickname, :class => "url_box" %>
   </div>
   <div class="actions">

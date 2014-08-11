@@ -30,6 +30,7 @@ html *{
 
 .product_intro {
   margin: auto;
+  margin-bottom: 5%;
   text-align: center;
   font-size: 30px;
   line-height: 60px;
