@@ -3,6 +3,7 @@ class LinksController < ApplicationController
   before_action :require_authorization!, only: [:edit, :update, :destroy]
   # GET /links
   def index
+    @link = Link.new
     @links = Link.order('created_at DESC')
     if logged_in?
       redirect_to users_path

@@ -1,0 +1,23 @@
+<h2>How does it work?</h2>
+Enter a REALLY LONG URL here:
+<%= form_for(link) do |f| %>
+  <% if link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited thislink from being saved:</h2>
+
+      <ul>
+      <% link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :url, :class => "url_box" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Shorten it!", :class => "button" %>
+  </div>
+<% end %>
+Your result should be added to top of the list below:

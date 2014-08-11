@@ -1,24 +1,27 @@
-<h1 class="welcome"> Welcome to URL-Squizzer, shorten your url so it's easier to view link and share with others! </h1>
+<h1 class="welcome"> Welcome to SlimLink, shorten your URL so it's easier to view link and share with others! </h1>
 <br>
 <div class="user_login">
   <h2>Please login to see more</h2>
   <br>
   <%= render partial: "shared/login_form" %>
   <br>
-  <h2>Or <%= link_to("Sign up", new_user_path) %></h2>
-  <br>
-<div>
-
-<% if flash[:notice] %>
   <div id="notice">
-    <strong><%= flash[:notice] %></strong>
+    <% if flash[:notice] %>
+      <strong><%= flash[:notice] %></strong>
+    <% end %>
   </div>
-<% end %>
+
+  <h2>Or <%= link_to("Sign up", new_user_path) %></h2>
+</div>
 <br>
 
-<h1>Listing links</h1>
+<div class="product_intro">
+  <%= render partial: "shared/product_description", locals: { link: @link } %>
+</div>
 
-<div>
+
+<div class="listings">
+  <h1>Listing links</h1>
   <table class="main_table">
     <col width="130">
     <col width="250">

@@ -28,10 +28,21 @@ html *{
   text-align: center;
 }
 
+.product_intro {
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  line-height: 50px;
+}
+
 .table_content {
   font-size: 30px;
 }
 
+.listings {
+  margin: auto;
+  text-align: center;
+}
 
 .main_table {
   margin-left: auto;
@@ -40,10 +51,17 @@ html *{
 }
 
 .input_box {
-  width:200px; 
-  height:30px; 
-  font-size:20px;
-  color:blue;
+  width: 200px; 
+  height: 30px; 
+  font-size: 20px;
+  color: #3B3F7D;
+}
+
+.url_box {
+  width: 500px;
+  height: 30px;
+  font-size: 20px;
+  color: #3B3F7D;
 }
 
 .button {
