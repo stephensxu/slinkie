@@ -22,16 +22,12 @@
 
 <div class="listings">
   <h1>Listing links</h1>
-  <table class="main_table">
-    <col width="130">
-    <col width="250">
-    <col width="200">
-    <col width="50">
+  <table class="main_table", cellspacing="30">
     <thead>
       <tr>
         <th>Added</th>
-        <th>Short URL</th>
-        <th>URL</th>
+        <th>SlimLink</th>
+        <th>Original URL</th>
         <th>clicks</th>
         <th colspan="4"></th>
       </tr>
@@ -41,15 +37,14 @@
       <% @links.each do |link| %>
         <% next if link.private %>
         <tr>
-          <td><%= time_ago_in_words(link.created_at) %> ago</td>
-          <td><%= link_to(link_url(link), link) %></td>
-          <td><%= link.url %></td>
-          <td><%= link.clicks_count %></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link.url %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
+          <td class="main_table_cell"><span class="main_table_content">SOMETHING</span></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<br>
-
-<%= link_to 'New Link', new_link_path %>
+<%= render partial: "shared/footer" %>
