@@ -6,7 +6,7 @@
   <br>
   <%= render partial: "shared/login_form" %>
   <br>
-  <div id="notice">
+  <div class="notice">
     <% if flash[:notice] %>
       <strong><%= flash[:notice] %></strong>
     <% end %>
@@ -30,7 +30,7 @@
         <th>SlimLink</th>
         <th>Nickname</th>
         <th>Clicks</th>
-        <th>Original URL</th>
+        <th>URL</th>
         <th colspan="4"></th>
       </tr>
     </thead>
@@ -41,9 +41,9 @@
         <tr>
           <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
           <td class="main_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link.nickname %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link.nickname, link_url(link)) %></span></td>
           <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link.url %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
         </tr>
       <% end %>
     </tbody>

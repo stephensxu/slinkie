@@ -3,6 +3,12 @@
 
 <p id="sign_in_benefits">You are signed in, you can now create, edit or delete your links; you can also change link's privacy setting.</p>
 
+<div class="notice">
+  <% if flash[:notice] %>
+    <strong><%= flash[:notice] %></strong>
+  <% end %>
+</div>
+
 <div class="product_intro">
   <%= render partial: "shared/product_description", locals: { link: @link } %>
 </div>
@@ -17,7 +23,8 @@
       <th>Creator</th>
       <th>Clicks</th>
       <th>Visible by others?</th>
-      <th colspan="3">Actions</th>
+      <th>Actions</th>
+      <th>URL</th>
     </tr>
   </thead>
 
@@ -25,36 +32,31 @@
     <% @links.each do |link| %>
       <% next if link.private && link.user != @current_user %>
       <tr>
-        <td><%= time_ago_in_words(link.created_at) %> ago</td>
-        <td><%= link_to(link_url(link), link) %></td>
-        <td><%= link.nickname %></td>
-        <td><%= user_display_name(link.user) %></td>
-        <td><%= link.clicks_count %></td>
-        <td>
+        <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
+        <td class="main_table_cell"><span class="main_table_content"><%= link_to link_url(link), link %></span></td>
+        <td class="main_table_cell"><span class="main_table_content"><%= link_to link.nickname, link_url(link) %></span></td>
+        <td class="main_table_cell"><span class="main_table_content"><%= user_display_name(link.user) %></span></td>
+        <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
+        <td class="main_table_cell"><span class="main_table_content">
           <% if link.editable_by?(@current_user) %>
-              <%= button_to("#{link_visibility(link)}", patch_link_path(link), 
+              <%= button_to("#{link_visibility(link)}", patch_link_path(link), :class => "table_button",
               :method => :patch, :params => { "link[private]" => "#{privacy_switch(link)}" }) %>
           <% end %>
-        </td>
-        <td>
+        </span></td>
+        <td class="main_table_cell"><span class="main_table_content">
           <% if link.editable_by?(@current_user) %>
             <ul class="link-actions">
-              <li><%= link_to("Edit", edit_link_path(link)) %></li>
-              <li><%= button_to("Delete", delete_link_path(link), :method => :delete) %></li>
+              <li class="table_list"><%= button_to("Edit", edit_link_path(link), :method => :get, :class => "table_button")%></li>
+              <li class="table_list"><%= button_to("Delete", delete_link_path(link), :method => :delete, :class => "table_button") %></li>
             </ul> 
           <% end %>
-        </td>
+        </span></td>
+        <td class="main_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<% if flash[:notice] %>
-  <div id="notice">
-    <strong><%= flash[:notice] %></strong>
-  </div>
-<% end %>
-</div>
 <%= render partial: "shared/footer" %>
