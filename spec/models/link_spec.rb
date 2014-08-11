@@ -4,6 +4,7 @@ RSpec.describe Link, :type => :model do
   describe '#valid?' do
     it { should validate_presence_of(:url) }
     it { should belong_to(:user) }
+    it { should validate_presence_of(:nickname) }
     # it { should validate_presence_of(:private) }
   end
 
