@@ -203,7 +203,6 @@ li.table_list {
   height: 40px;
   padding: 30px;
   margin-top: 5%;
-  margin-bottom: 3%;
   text-align: center;
   background-color: #809CB2
 }
@@ -227,6 +226,7 @@ li.table_list {
 
 .notice {
   margin: auto;
+  margin-bottom: 3%;
   text-align: center;
   color: green;
   font-size: 30px;
