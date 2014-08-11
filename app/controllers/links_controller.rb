@@ -3,6 +3,7 @@ class LinksController < ApplicationController
   before_action :require_authorization!, only: [:edit, :update, :destroy]
   # GET /links
   def index
+    @link = Link.new
     @links = Link.order('created_at DESC')
     if logged_in?
       redirect_to users_path
@@ -15,7 +16,7 @@ class LinksController < ApplicationController
   # See routes.rb for how this is set up.
   def show
     if @link
-      @link.clicked!
+      @link.clicked!(:referrer => request.referrer)
       redirect_to @link.url
     else
       render text: "No such link.", status: 404
@@ -44,7 +45,7 @@ class LinksController < ApplicationController
 
   def update
     if @link.update(link_params)
-      redirect_to root_url, notic: 'Link was succesfully updated'
+      redirect_to root_url, notice: 'Link was succesfully updated'
     else
       render :edit
     end
@@ -58,7 +59,7 @@ class LinksController < ApplicationController
   private
   # Only allow a trusted parameter "white list" through.
   def link_params
-    params.require(:link).permit(:url)
+    params.require(:link).permit(:url, :private, :nickname)
   end
 
   def set_link

@@ -1,10 +1,12 @@
 class Link < ActiveRecord::Base
-  before_create :set_short_name
+  before_create :set_short_name, :smart_add_url_protocol
 
   validates :url, :presence => true
-  validates :clicks_count, :presence => true, numericality: { only_integer: true }
+  validates :nickname, :presence => true
+  # validates :private, :presence => true, inclusion: { in: [true, false] }
 
   belongs_to :user
+  has_many :clicks, :class_name => "LinkClick"
 
   # This controls how an ActiveRecord object is displayed in a URL context.
   # This way, if we do link_path(@link), Rails will generate a path like
@@ -14,8 +16,16 @@ class Link < ActiveRecord::Base
     self.short_name
   end
 
-  def clicked!
-    self.clicks_count += 1
+  def clicked!(click_attributes = {})
+    self.clicks.create(click_attributes)
+  end
+
+  def clicks_count
+    self.clicks.count
+  end
+
+  def change_privacy
+    self.private ? self.private = false : self.private = true
     self.save
   end
 
@@ -38,5 +48,11 @@ class Link < ActiveRecord::Base
     end
 
     self.short_name = try_short_name
+  end
+
+  def smart_add_url_protocol
+    unless self.url[/\Ahttp(s):\/\//]
+      self.url = "http://#{self.url}"
+    end
   end
 end

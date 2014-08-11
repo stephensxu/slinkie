@@ -1,10 +1,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :link do
-    url { Faker::Internet.url }
+  factory :link do |l|
+    l.url { Faker::Internet.url }
+    l.private false
 
-    trait :with_user do
+    l.trait :with_user do
       user
     end
 

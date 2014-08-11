@@ -1,50 +1,52 @@
-<h1> Welcome to URL-Shortener, make long url address into short url address! </h1>
-<br>
-<h1>Please login to see more</h1>
+<h1 class="welcome"> Welcome to SlimLink, shorten your URL so it's easier to view link and share with friends! </h1>
 <br>
 
-<%= render partial: "shared/login_form" %>
-
-<br>
-<h1>Or <%= link_to("Sign up", new_user_path) %></h1>
-<br>
-
-<% if flash[:notice] %>
-  <div id="notice">
-    <strong><%= flash[:notice] %></strong>
-  </div>
-<% end %>
-<br>
-
-<h1>Listing links</h1>
-
-<table>
-  <col width="130">
-  <col width="200">
-  <col width="200">
-  <col width="50">
-  <thead>
-    <tr>
-      <th>Added</th>
-      <th>Short URL</th>
-      <th>URL</th>
-      <th>clicks</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @links.each do |link| %>
-      <tr>
-        <td><%= time_ago_in_words(link.created_at) %> ago</td>
-        <td><%= link_to(link_path(link), link) %></td>
-        <td><%= link.url %></td>
-        <td><%= link.clicks_count %></td>
-      </tr>
+<div class="user_login">
+  <h2>Please login to see more</h2>
+  <br>
+  <%= render partial: "shared/login_form" %>
+  <br>
+  <div class="notice">
+    <% if flash[:notice] %>
+      <strong><%= flash[:notice] %></strong>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
+  <h2>Or <%= link_to("Sign up", new_user_path) %></h2>
+</div>
 <br>
 
-<%= link_to 'New Link', new_link_path %>
+<div class="product_intro">
+  <%= render partial: "shared/product_description", locals: { link: @link } %>
+</div>
+
+
+<div class="listings">
+  <h1>Listing links</h1>
+  <table class="main_table", cellspacing="30">
+    <thead>
+      <tr>
+        <th>Added</th>
+        <th>SlimLink</th>
+        <th>Nickname</th>
+        <th>Clicks</th>
+        <th>URL</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @links.each do |link| %>
+        <% next if link.private %>
+        <tr>
+          <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link.nickname, link_url(link)) %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
+          <td class="main_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= render partial: "shared/footer" %>
