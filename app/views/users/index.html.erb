@@ -1,19 +1,19 @@
-<h1><%= render partial: "shared/header" %></h1>
+<h1 class="header"><%= render partial: "shared/header" %></h1>
 <br>
-<br>
-<table>
-  <col width="130">
-  <col width="250">
-  <col width="200">
-  <col width="200">
-  <col width="100">
-  <col width="80">
 
+<p id="sign_in_benefits">You are signed in, you can now create, edit or delete your links; you can also change link's privacy setting.</p>
+
+<div class="product_intro">
+  <%= render partial: "shared/product_description", locals: { link: @link } %>
+</div>
+
+<div class="listings">
+<table class="main_table", cellspacing="30">
   <thead>
     <tr>
       <th>Added</th>
-      <th>Short URL</th>
-      <th>URL</th>
+      <th>SlimLink</th>
+      <th>Nickname</th>
       <th>Creator</th>
       <th>Clicks</th>
       <th>Visible by others?</th>
@@ -27,7 +27,7 @@
       <tr>
         <td><%= time_ago_in_words(link.created_at) %> ago</td>
         <td><%= link_to(link_url(link), link) %></td>
-        <td><%= link.url %></td>
+        <td><%= link.nickname %></td>
         <td><%= user_display_name(link.user) %></td>
         <td><%= link.clicks_count %></td>
         <td>
@@ -56,6 +56,5 @@
     <strong><%= flash[:notice] %></strong>
   </div>
 <% end %>
-
-
-<%= link_to 'New Link', new_link_path %>
+</div>
+<%= render partial: "shared/footer" %>

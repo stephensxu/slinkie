@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     current_user
+    @link = Link.new
     @links = Link.order('created_at DESC')
     render :index
   end

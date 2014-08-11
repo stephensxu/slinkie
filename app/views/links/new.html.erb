@@ -1,5 +1,7 @@
-<h1>New link</h1>
+<div class="new_link">
+	Give me a long url to turn into SlimLink
 
-<%= render partial: 'form', locals: { link: @link } %>
+  <%= render partial: 'link_form', locals: { link: @link } %>
 
-<%= link_to 'Back', index_path %>
+  <%= link_to 'Home', index_path %>
+</div>
