@@ -1,5 +1,5 @@
 <%= form_for(:session, :url => login_path, :method => :post) do |f| %>
-  Login with Email <%= f.text_field(:email, placeholder: "Email")%>
-  Password <%= f.password_field(:password, placeholder: "password")%>
-  <%= f.submit "Login", :style => "width:100px" %>
+  Login with Email <%= f.text_field(:email, :placeholder => "Email", :class => "input_box")%>
+  Password <%= f.password_field(:password, :placeholder => "password", :class => "input_box")%>
+  <%= f.submit "Login", :class => "button" %>
 <% end %>

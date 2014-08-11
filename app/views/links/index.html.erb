@@ -1,13 +1,13 @@
-<h1> Welcome to URL-Shortener, make long url address into short url address! </h1>
+<h1 class="welcome"> Welcome to URL-Squizzer, shorten your url so it's easier to view link and share with others! </h1>
 <br>
-<h1>Please login to see more</h1>
-<br>
-
-<%= render partial: "shared/login_form" %>
-
-<br>
-<h1>Or <%= link_to("Sign up", new_user_path) %></h1>
-<br>
+<div class="user_login">
+  <h2>Please login to see more</h2>
+  <br>
+  <%= render partial: "shared/login_form" %>
+  <br>
+  <h2>Or <%= link_to("Sign up", new_user_path) %></h2>
+  <br>
+<div>
 
 <% if flash[:notice] %>
   <div id="notice">
@@ -18,34 +18,35 @@
 
 <h1>Listing links</h1>
 
-<table>
-  <col width="130">
-  <col width="250">
-  <col width="200">
-  <col width="50">
-  <thead>
-    <tr>
-      <th>Added</th>
-      <th>Short URL</th>
-      <th>URL</th>
-      <th>clicks</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @links.each do |link| %>
-      <% next if link.private %>
+<div>
+  <table class="main_table">
+    <col width="130">
+    <col width="250">
+    <col width="200">
+    <col width="50">
+    <thead>
       <tr>
-        <td><%= time_ago_in_words(link.created_at) %> ago</td>
-        <td><%= link_to(link_url(link), link) %></td>
-        <td><%= link.url %></td>
-        <td><%= link.clicks_count %></td>
+        <th>Added</th>
+        <th>Short URL</th>
+        <th>URL</th>
+        <th>clicks</th>
+        <th colspan="4"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @links.each do |link| %>
+        <% next if link.private %>
+        <tr>
+          <td><%= time_ago_in_words(link.created_at) %> ago</td>
+          <td><%= link_to(link_url(link), link) %></td>
+          <td><%= link.url %></td>
+          <td><%= link.clicks_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
 <%= link_to 'New Link', new_link_path %>

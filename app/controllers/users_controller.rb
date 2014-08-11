@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def index
     current_user
     @links = Link.order('created_at DESC')
-    render :"users/home"
+    render :index
   end
 
   def show
