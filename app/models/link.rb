@@ -2,6 +2,7 @@ class Link < ActiveRecord::Base
   before_create :set_short_name, :smart_add_url_protocol
 
   validates :url, :presence => true
+  validates :nickname, :presence => true
   # validates :private, :presence => true, inclusion: { in: [true, false] }
 
   belongs_to :user
