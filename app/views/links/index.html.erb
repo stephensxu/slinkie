@@ -39,11 +39,11 @@
       <% @links.each do |link| %>
         <% next if link.private %>
         <tr>
-          <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link_to(link.nickname, link_url(link)) %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
-          <td class="main_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
+          <td class="public_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
+          <td class="public_table_cell"><span class="main_table_content"><%= link_to(link_url(link), link) %></span></td>
+          <td class="public_table_cell"><span class="main_table_content"><%= link_to(link.nickname, link_url(link)) %></span></td>
+          <td class="public_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
+          <td class="public_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
         </tr>
       <% end %>
     </tbody>

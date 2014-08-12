@@ -32,18 +32,18 @@
     <% @links.each do |link| %>
       <% next if link.private && link.user != @current_user %>
       <tr>
-        <td class="main_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
-        <td class="main_table_cell"><span class="main_table_content"><%= link_to link_url(link), link %></span></td>
-        <td class="main_table_cell"><span class="main_table_content"><%= link_to link.nickname, link_url(link) %></span></td>
-        <td class="main_table_cell"><span class="main_table_content"><%= user_display_name(link.user) %></span></td>
-        <td class="main_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
-        <td class="main_table_cell"><span class="main_table_content">
+        <td class="private_table_cell"><span class="main_table_content"><%= time_ago_in_words(link.created_at) %> ago</span></td>
+        <td class="private_table_cell"><span class="main_table_content"><%= link_to link_url(link), link %></span></td>
+        <td class="private_table_cell"><span class="main_table_content"><%= link_to link.nickname, link_url(link) %></span></td>
+        <td class="private_table_cell"><span class="main_table_content"><%= user_display_name(link.user) %></span></td>
+        <td class="private_table_cell"><span class="main_table_content"><%= link.clicks_count %></span></td>
+        <td class="private_table_cell"><span class="main_table_content">
           <% if link.editable_by?(@current_user) %>
               <%= button_to("#{link_visibility(link)}", patch_link_path(link), :class => "table_button",
               :method => :patch, :params => { "link[private]" => "#{privacy_switch(link)}" }) %>
           <% end %>
         </span></td>
-        <td class="main_table_cell"><span class="main_table_content">
+        <td class="private_table_cell"><span class="main_table_content">
           <% if link.editable_by?(@current_user) %>
             <ul class="link-actions">
               <li class="table_list"><%= button_to("Edit", edit_link_path(link), :method => :get, :class => "table_button")%></li>
@@ -51,7 +51,7 @@
             </ul> 
           <% end %>
         </span></td>
-        <td class="main_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
+        <td class="private_table_cell"><span class="main_table_content"><%= link_to link.url, link_url(link) %></span></td>
       </tr>
     <% end %>
   </tbody>

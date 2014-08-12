@@ -159,7 +159,7 @@ html *{
 }
 
 .main_table_content {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .listings {
@@ -167,16 +167,34 @@ html *{
   margin-right: 3%;
   text-align: center;
   line-height: 30px;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .main_table {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   color: #3B3F7D;
   word-wrap: break-word;
   max-width: 20px;
+}
+
+.public_table_cell{
+  font-size: 10px;
+  min-width: 150px;
+  max-width: 200px;
+  word-wrap: break-all;
+  overflow: hidden;
+}
+
+.private_table_cell{
+  font-size: 10px;
+  min-width: 100px;
+  max-width: 150px;
+  /*word-wrap: break-all;*/
+  /*overflow: hidden;*/
 }
 
 .input_box {
@@ -204,12 +222,12 @@ html *{
 }
 
 .table_button {
-  width:80px;
+  width: 65px;
   border-radius: 40px;
-  font-size: 20px;
+  font-size: 16px;
   background-color: #3B3F7D;
   color: white;
-  height: 30px;
+  height: 27px;
   cursor: pointer;
 }
 
@@ -223,14 +241,6 @@ li.table_list {
   margin-top: 5%;
   text-align: center;
   background-color: #809CB2
-}
-
-.main_table_cell{
-  font-size: 10px;
-  min-width: 150px;
-  max-width: 300px;
-  word-wrap: break-word;
-  overflow: hidden;
 }
 
 #sign_in_benefits {
