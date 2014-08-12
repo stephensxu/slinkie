@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  before_create :set_short_name, :smart_add_url_protocol
+  before_create :set_short_name, :prepend_http_if_not_present
 
   validates :url, :presence => true
   validates :nickname, :presence => true
@@ -50,7 +50,7 @@ class Link < ActiveRecord::Base
     self.short_name = try_short_name
   end
 
-  def smart_add_url_protocol
+  def prepend_http_if_not_present
     unless self.url[/\Ahttp(s):\/\//]
       self.url = "http://#{self.url}"
     end
